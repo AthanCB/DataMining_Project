@@ -143,9 +143,9 @@ public class Main extends javax.swing.JFrame {
             
             ExampleSet resultSet = (ExampleSet)ioResult.getElementAt(0);
             Example example = resultSet.getExample(0);
-            Attribute Prediction = example.getAttributes().get("prediction(Language)");
+            Attribute Prediction = example.getAttributes().get("prediction(language)");
             String resultString = example.getValueAsString(Prediction);
-            if(resultString.equals("gr"))
+            if(resultString.equals("el"))
                 detection.setText("Greek");
             else if(resultString.equals("de"))
                  detection.setText("Deutch");

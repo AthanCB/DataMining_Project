@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="8.2.000">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="8.2.000" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="imageprocessing:multiple_color_image_opener" compatibility="1.4.001" expanded="true" height="68" name="MCIO" width="90" x="179" y="34">
+        <parameter key="datamanagement" value="double_array"/>
+        <list key="images">
+          <parameter key="Gipeda" value="C:\Users\AthanasiosBonis\Desktop\foto_gipeda"/>
+        </list>
+        <parameter key="auto_adjust_contrast" value="false"/>
+        <parameter key="set_mask" value="false"/>
+        <parameter key="mask_foldername" value="fitness"/>
+        <parameter key="extension" value="ALL IMAGES"/>
+        <parameter key="assign_label" value="false"/>
+        <parameter key="filter_by_orientation" value="false"/>
+        <parameter key="orientation" value="SAGITTAL"/>
+        <parameter key="include_unknown_orientation" value="false"/>
+        <parameter key="ignore_errors" value="false"/>
+        <process expanded="true">
+          <operator activated="true" breakpoints="after" class="imageprocessing:statistical_region_merging" compatibility="1.4.001" expanded="true" height="68" name="statistical_region_merging" width="90" x="112" y="34">
+            <parameter key="min_size_of_region" value="1.0E-4"/>
+            <parameter key="q" value="184"/>
+            <parameter key="color_model" value="RGB"/>
+            <parameter key="output_type" value="Original"/>
+          </operator>
+          <operator activated="true" class="imageprocessing:roi_feature_extractor" compatibility="1.4.001" expanded="true" height="82" name="Segment Feature Extractor" width="90" x="246" y="34">
+            <parameter key="local_random_seed" value="-1"/>
+            <parameter key="include_filename" value="true"/>
+            <parameter key="include_mask_ID" value="true"/>
+            <process expanded="true">
+              <operator activated="true" class="imageprocessing:roi_statistics" compatibility="1.4.001" expanded="true" height="68" name="roi_statistics" width="90" x="112" y="34">
+                <parameter key="mean" value="true"/>
+                <parameter key="median" value="true"/>
+                <parameter key="kurtosis" value="true"/>
+                <parameter key="standard_deviation" value="true"/>
+                <parameter key="peak" value="true"/>
+                <parameter key="min_gray_value" value="true"/>
+                <parameter key="max_gray_value" value="true"/>
+                <parameter key="area" value="true"/>
+                <parameter key="center_of_mass" value="false"/>
+                <parameter key="normalized_center_of_mass" value="true"/>
+                <parameter key="skewness" value="true"/>
+                <parameter key="area_fraction" value="true"/>
+                <parameter key="centroid" value="false"/>
+                <parameter key="normalized_centroid" value="true"/>
+                <parameter key="major_axis" value="true"/>
+                <parameter key="minor_axis" value="true"/>
+                <parameter key="angle" value="true"/>
+                <parameter key="perimeter" value="true"/>
+                <parameter key="Feret's_calcs" value="true"/>
+                <parameter key="circularity" value="true"/>
+                <parameter key="relative_size" value="true"/>
+                <parameter key="inner_perimeter_comprehensiveness" value="true"/>
+                <parameter key="alongeness" value="true"/>
+                <parameter key="eccentricity" value="true"/>
+                <parameter key="dominant_color" value="true"/>
+                <parameter key="number_of_dominant_color" value="3"/>
+                <parameter key="CSS representation" value="true"/>
+                <parameter key="normalized_threshold_of_applied_filters_to_largest_peak" value="10"/>
+                <parameter key="fitness" value="false"/>
+                <parameter key="algorithm" value="From mask"/>
+              </operator>
+              <connect from_port="ROI color 1" to_op="roi_statistics" to_port="ROI image plus"/>
+              <connect from_op="roi_statistics" from_port="feature" to_port="feature 1"/>
+              <portSpacing port="source_ROI color 1" spacing="0"/>
+              <portSpacing port="source_ROI color 2" spacing="0"/>
+              <portSpacing port="sink_feature 1" spacing="0"/>
+              <portSpacing port="sink_feature 2" spacing="0"/>
+            </process>
+          </operator>
+          <operator activated="true" class="numerical_to_binominal" compatibility="8.2.000" expanded="true" height="82" name="Numerical to Binominal" width="90" x="447" y="34">
+            <parameter key="attribute_filter_type" value="single"/>
+            <parameter key="attribute" value="label"/>
+            <parameter key="attributes" value=""/>
+            <parameter key="use_except_expression" value="false"/>
+            <parameter key="value_type" value="numeric"/>
+            <parameter key="use_value_type_exception" value="false"/>
+            <parameter key="except_value_type" value="real"/>
+            <parameter key="block_type" value="value_series"/>
+            <parameter key="use_block_type_exception" value="false"/>
+            <parameter key="except_block_type" value="value_series_end"/>
+            <parameter key="invert_selection" value="false"/>
+            <parameter key="include_special_attributes" value="true"/>
+            <parameter key="min" value="0.0"/>
+            <parameter key="max" value="0.0"/>
+          </operator>
+          <connect from_port="color image plus" to_op="statistical_region_merging" to_port="color image plus"/>
+          <connect from_op="statistical_region_merging" from_port="segmented image" to_op="Segment Feature Extractor" to_port="segmented image plus"/>
+          <connect from_op="Segment Feature Extractor" from_port="example set" to_op="Numerical to Binominal" to_port="example set input"/>
+          <connect from_op="Numerical to Binominal" from_port="example set output" to_port="Example set"/>
+          <portSpacing port="source_color image plus" spacing="0"/>
+          <portSpacing port="sink_Example set" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="write_csv" compatibility="8.2.000" expanded="true" height="82" name="Write CSV" width="90" x="380" y="34">
+        <parameter key="csv_file" value="C:\Users\AthanasiosBonis\Desktop\gipeda.csv"/>
+        <parameter key="column_separator" value=";"/>
+        <parameter key="write_attribute_names" value="true"/>
+        <parameter key="quote_nominal_values" value="true"/>
+        <parameter key="format_date_attributes" value="true"/>
+        <parameter key="append_to_file" value="true"/>
+        <parameter key="encoding" value="SYSTEM"/>
+      </operator>
+      <connect from_op="MCIO" from_port="example set" to_op="Write CSV" to_port="input"/>
+      <connect from_op="Write CSV" from_port="through" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

@@ -29,7 +29,7 @@
         <process expanded="true">
           <operator activated="true" breakpoints="after" class="imageprocessing:statistical_region_merging" compatibility="1.4.001" expanded="true" height="68" name="statistical_region_merging" width="90" x="112" y="34">
             <parameter key="min_size_of_region" value="1.0E-4"/>
-            <parameter key="q" value="184"/>
+            <parameter key="q" value="204"/>
             <parameter key="color_model" value="RGB"/>
             <parameter key="output_type" value="Original"/>
           </operator>
@@ -78,7 +78,7 @@
               <portSpacing port="sink_feature 2" spacing="0"/>
             </process>
           </operator>
-          <operator activated="true" class="numerical_to_binominal" compatibility="8.2.000" expanded="true" height="82" name="Numerical to Binominal" width="90" x="447" y="34">
+          <operator activated="true" class="numerical_to_binominal" compatibility="8.2.000" expanded="true" height="82" name="Numerical to Binominal" width="90" x="380" y="34">
             <parameter key="attribute_filter_type" value="single"/>
             <parameter key="attribute" value="label"/>
             <parameter key="attributes" value=""/>
@@ -104,11 +104,11 @@
       </operator>
       <operator activated="true" class="write_csv" compatibility="8.2.000" expanded="true" height="82" name="Write CSV" width="90" x="380" y="34">
         <parameter key="csv_file" value="C:\Users\AthanasiosBonis\Desktop\gipeda.csv"/>
-        <parameter key="column_separator" value=";"/>
+        <parameter key="column_separator" value=","/>
         <parameter key="write_attribute_names" value="true"/>
         <parameter key="quote_nominal_values" value="true"/>
         <parameter key="format_date_attributes" value="true"/>
-        <parameter key="append_to_file" value="true"/>
+        <parameter key="append_to_file" value="false"/>
         <parameter key="encoding" value="SYSTEM"/>
       </operator>
       <connect from_op="MCIO" from_port="example set" to_op="Write CSV" to_port="input"/>

@@ -15,7 +15,7 @@
       <operator activated="true" class="imageprocessing:multiple_color_image_opener" compatibility="1.4.001" expanded="true" height="68" name="MCIO" width="90" x="179" y="34">
         <parameter key="datamanagement" value="double_array"/>
         <list key="images">
-          <parameter key="Gipeda" value="C:\Users\AthanasiosBonis\Desktop\foto_gipeda"/>
+          <parameter key="Gipeda" value="C:\GitHub\DataMining_Project\DM_Ex02\foto_gipeda\sub1"/>
         </list>
         <parameter key="auto_adjust_contrast" value="false"/>
         <parameter key="set_mask" value="false"/>
@@ -28,7 +28,7 @@
         <parameter key="ignore_errors" value="false"/>
         <process expanded="true">
           <operator activated="true" breakpoints="after" class="imageprocessing:statistical_region_merging" compatibility="1.4.001" expanded="true" height="68" name="statistical_region_merging" width="90" x="112" y="34">
-            <parameter key="min_size_of_region" value="1.0E-4"/>
+            <parameter key="min_size_of_region" value="1.0E-5"/>
             <parameter key="q" value="204"/>
             <parameter key="color_model" value="RGB"/>
             <parameter key="output_type" value="Original"/>

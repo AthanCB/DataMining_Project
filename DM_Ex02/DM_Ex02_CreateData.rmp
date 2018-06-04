@@ -12,7 +12,7 @@
     <parameter key="process_duration_for_mail" value="30"/>
     <parameter key="encoding" value="SYSTEM"/>
     <process expanded="true">
-      <operator activated="true" class="imageprocessing:multiple_color_image_opener" compatibility="1.4.001" expanded="true" height="68" name="MCIO" width="90" x="179" y="34">
+      <operator activated="true" class="imageprocessing:multiple_color_image_opener" compatibility="1.4.001" expanded="true" height="68" name="MCIO" width="90" x="112" y="34">
         <parameter key="datamanagement" value="double_array"/>
         <list key="images">
           <parameter key="Gipeda" value="C:\GitHub\DataMining_Project\DM_Ex02\foto_gipeda\sub1"/>
@@ -102,7 +102,7 @@
           <portSpacing port="sink_Example set" spacing="0"/>
         </process>
       </operator>
-      <operator activated="true" class="write_csv" compatibility="8.2.000" expanded="true" height="82" name="Write CSV" width="90" x="380" y="34">
+      <operator activated="true" class="write_csv" compatibility="8.2.000" expanded="true" height="82" name="Write CSV" width="90" x="246" y="34">
         <parameter key="csv_file" value="C:\Users\AthanasiosBonis\Desktop\gipeda.csv"/>
         <parameter key="column_separator" value=","/>
         <parameter key="write_attribute_names" value="true"/>

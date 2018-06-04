@@ -125,7 +125,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String text;
-        String textFile = "C:\\Users\\AthanasiosBonis\\Desktop\\language.csv";
+        String textFile = "C:\\GitHub\\DataMining_Project\\DM_Ex01\\Rapidminer\\language.csv";
         text = LanguageText.getText();
         
         try{
@@ -135,7 +135,7 @@ public class Main extends javax.swing.JFrame {
             fw.flush();
             fw.close();
             
-            File processFile = new File("C:\\Users\\AthanasiosBonis\\.RapidMiner\\repositories\\Local Repository\\LanguageDetection.rmp");
+            File processFile = new File("C:\\GitHub\\DataMining_Project\\DM_Ex01\\Rapidminer\\LanguageDetection.rmp");
             
             com.rapidminer.Process process = new com.rapidminer.Process(processFile);
             

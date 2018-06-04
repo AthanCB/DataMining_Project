@@ -5,7 +5,16 @@
  */
 package dm_ex02;
 
+import com.rapidminer.example.Attribute;
+import com.rapidminer.example.Example;
+import com.rapidminer.example.ExampleSet;
+import com.rapidminer.operator.IOContainer;
+import com.rapidminer.operator.OperatorException;
+import com.rapidminer.tools.XMLException;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.FileChooser;
 import javax.swing.JFileChooser;
 
@@ -105,8 +114,24 @@ public class MainFrame extends javax.swing.JFrame {
         
         fc.show();
         if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-           f = fc.getSelectedFile();
-            // read  and/or display the file somehow. ....
+            try {
+                f = fc.getSelectedFile();
+                File processFile = new File("C:\\GitHub\\DataMining_Project\\DM_Ex02\\Rapidminer\\DM_Ex02.rmp");
+                com.rapidminer.Process process = new com.rapidminer.Process(processFile);
+                
+                IOContainer ioResult = process.run();
+                
+                ExampleSet resultSet = (ExampleSet)ioResult.getElementAt(0);
+                Example example = resultSet.getExample(0);
+                Attribute Prediction = example.getAttributes().get("prediction(label)");
+                
+            } catch (OperatorException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (XMLException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             // user changed their mind
         }
